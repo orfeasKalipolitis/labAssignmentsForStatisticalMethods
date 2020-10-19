@@ -105,3 +105,40 @@ ax2.pie(sizes, explode=explode, labels=labels, autopct='%1.2f%%',
 ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
 plt.show()
+
+
+# Box plot
+ages = dataMatrix['age']
+ageMax = np.max(ages)
+ageMin = np.min(ages)
+ageMedian = np.median(ages)
+ageQ1 = np.quantile(ages, 0.25)
+ageQ3 = np.quantile(ages, 0.75)
+print('Q1: ', ageQ1)
+print('Q2: ', ageQ3)
+
+boxData = [ages]
+fig3, ax3 = plt.subplots()
+ax3.set_title('max, min, median, the first and third quartile box plot of Age')
+ax3.set_xticklabels(['Age'])
+ax3.boxplot(boxData, showmeans=True)
+plt.show()
+
+
+# Ex 1.c: mean and Standard Deviation of Income
+incomeMean = np.mean(income)
+incomeStandardDeviation = np.std(income)
+
+print('Income mean: ', incomeMean)
+print('Income Standard Deviation: ', incomeStandardDeviation)
+
+# the histogram of the data
+n, bins, patches = plt.hist(income, 50, density=True, facecolor='g', alpha=0.75)
+
+plt.xlabel('Income in 1000s of SEK')
+plt.ylabel('Probability')
+plt.title('Histogram of Income')
+plt.xlim(np.min(income) + 5, np.max(income) + 5)
+#plt.ylim(0, 0.03)
+plt.grid(True)
+plt.show()
