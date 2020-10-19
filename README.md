@@ -10,3 +10,7 @@ for the course:
 Statistical Methods for Data Science
 
 as part of the Applied Data Science Master's Program.
+
+
+# Dependencies
+Python3: pandas, xlrd
