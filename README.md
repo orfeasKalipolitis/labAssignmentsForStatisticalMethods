@@ -13,4 +13,4 @@ as part of the Applied Data Science Master's Program.
 
 
 # Dependencies
-Python3: pandas, xlrd
+Python3: pandas, xlrd, matplotlib, numpy
