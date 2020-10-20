@@ -16,6 +16,7 @@ income = dataMatrix['income']
 productivity = dataMatrix['prody']
 skills = dataMatrix['skill']
 ethnic = dataMatrix['ethnicgp']
+quality = dataMatrix['qual']
 
 # Prapare gendered data
 femaleIncome = []
@@ -142,3 +143,25 @@ plt.xlim(np.min(income) + 5, np.max(income) + 5)
 #plt.ylim(0, 0.03)
 plt.grid(True)
 plt.show()
+
+
+# Ex 2
+x = income
+y = quality
+
+plt.scatter(x, y, c="g", label="Relationship between Income & Rated Quality")
+plt.xlabel("Income")
+plt.ylabel("Rated Quality")
+plt.legend(loc='upper left')
+plt.show()
+
+# Find the simple regression model where income is the dependent variable and rated quality is the independent
+# What is the determination coefficient?
+x = quality
+y = income
+
+correlation_matrix = np.corrcoef(x, y)
+correlation_xy = correlation_matrix[0,1]
+detCoeff = correlation_xy**2
+
+print('Our calculated determination coefficient is: ', detCoeff) 
