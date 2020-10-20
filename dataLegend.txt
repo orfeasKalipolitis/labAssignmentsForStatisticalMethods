@@ -1,6 +1,14 @@
 ethnicgp = ethnic group  (1 = White, 2 = Asian, 3 = West Indian, 4 = African, 5 = other) 							
-gender ( male =1, female =2)							
+gender ( male =1, female =2)
+income = gross annual income before tax in 1000£
+age in years
+years = number of years working at this firm
+commit = organisational commitment(scale 1 ~ 5)
+satis = job satisfaction
+autonom = job autonomy
+routine = job routine					
 attend = attendance at meeting (yes = 1, no = 2)							
 skill = rated skill (unskilled = 1, semi-skilled = 2, fairly skilled = 3, highly skilled = 4)							
 prody = rated productivity (very poor = 1, poor = 2, average = 3, good = 4, very good = 5)							
-qual = rated quality (very poor = 1, poor = 2, average = 3, good= 4, very good = 5)							
+qual = rated quality (very poor = 1, poor = 2, average = 3, good= 4, very good = 5)
+absence = days of being absent in last 12 months					
