@@ -134,8 +134,8 @@ print('Q2: ', ageQ3)
 boxData = [age]
 fig3, ax3 = plt.subplots()
 ax3.set_title('max, min, median, the first and third quartile box plot of Age')
-ax3.set_xticklabels(['Age'])
 ax3.boxplot(boxData, showmeans=True)
+plt.xlabel('Age')
 plt.show()
 
 
