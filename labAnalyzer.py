@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy import stats as spStats
 import dataGetter as data
 import barplot, pieChart, boxplot, histogram, scatterplot, simpleRegression, multipleRegression
+import confidence
 
 # Ex 1a. Barplot
 barplot.show()
@@ -45,41 +46,11 @@ multipleRegression.show()
 
 
 # Ex 4. Find confidence interval of job satisfaction
-confidenceLevel = 0.95
-ciSatisfaction = spStats.t.interval(confidenceLevel, len(satisfaction) - 1, loc=np.mean(satisfaction), scale=spStats.sem(satisfaction))
-print('The confidence interval of job satisfaction for all genders was: ', end='')
-print(ciSatisfaction)
-
-# Find confidence interval of difference in job satisfaction between men and women
-
-# Clean satisfaction data, as both female and male data need to have same length
-# Create local copies to mess with
-tmpMaleSatisfaction = maleSatisfaction.copy()
-tmpFemaleSatisfaction = femaleSatisfaction.copy()
-nMale = len(tmpMaleSatisfaction)
-nFemale = len(tmpFemaleSatisfaction)
-
-# Python dataToClean to be a reference to either of the two NOT a copy of the values
-dataToClean = tmpFemaleSatisfaction if nFemale > nMale else tmpMaleSatisfaction
-nDataToClean = len(dataToClean)
-
-# Get rid of the first elements of the biggest array and replace on original array
-dataToClean.sort()
-dataToClean = np.delete(dataToClean, range(0, abs(nFemale - nMale)))
-if nFemale > nMale:
-    tmpFemaleSatisfaction = dataToClean.copy()
-else:
-    tmpMaleSatisfaction = dataToClean.copy()
-
-# Get the diff and output the answer
-diffSatisfaction = np.abs(np.array(tmpFemaleSatisfaction) - np.array(tmpMaleSatisfaction))
-ciSatisfaction = spStats.t.interval(confidenceLevel, len(diffSatisfaction) - 1, loc=np.mean(diffSatisfaction), scale=spStats.sem(diffSatisfaction))
-print('The confidence interval of difference in job satisfaction between men and women was: ', end='')
-print(ciSatisfaction)
+confidence.show()
 
 
 # Ex 5. Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women
-mwwTest = spStats.mannwhitneyu(femaleSkills, maleSkills)
+mwwTest = spStats.mannwhitneyu(data.femaleSkills, data.maleSkills)
 print('Mann-Whitney-Wilcoxon test to see if there is any significance in skill between men and women:')
 print(mwwTest)
 
