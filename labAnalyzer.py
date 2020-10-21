@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats as spStats
 import dataGetter as data
-import barplot, pieChart, boxplot, histogram, scatterplot, simpleRegression
+import barplot, pieChart, boxplot, histogram, scatterplot, simpleRegression, multipleRegression
 
 # Ex 1a. Barplot
 barplot.show()
@@ -41,36 +41,7 @@ simpleRegression.show()
 # dependent: satis
 # independent: commit, autonom, income, skill, rated quality, age, years 
 # Following Lecture 11, Multiple Regression
-
-Y = satisfaction
-XT = np.array([np.ones(len(Y)), commitment, autonomy, income, skills, quality, age, years]) # X transpose
-X = XT.transpose()
-
-XTX = XT.dot(X)
-XTY = XT.dot(Y)
-
-B = np.linalg.inv(XTX).dot(XTY)
-print('Variable weights:')
-print(B)
-print('Income and years seem to have the lowest significance at weights of ~0.04 and ~-0.02 respectively.')
-
-YEst = X.dot(B)
-SSE = np.sum(np.power(Y - YEst, 2))
-print('This gives an error sum of squares equal to: ', SSE)
-
-# Dropping income and years
-print('Dropping the income and years as independent variables.')
-XT = np.array([np.ones(len(Y)), commitment, autonomy, skills, quality, age]) # X transpose
-X = XT.transpose()
-
-XTX = XT.dot(X)
-XTY = XT.dot(Y)
-
-B = np.linalg.inv(XTX).dot(XTY)
-YEst = X.dot(B)
-SSE = np.sum(np.power(Y - YEst, 2))
-print('This gives an error sum of squares equal to: ', SSE)
-# They are off by ~1% one from the other, so dropping those definitely is for the better
+multipleRegression.show()
 
 
 # Ex 4. Find confidence interval of job satisfaction
