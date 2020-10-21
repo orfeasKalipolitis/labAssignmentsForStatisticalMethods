@@ -1,63 +1,12 @@
 
 import matplotlib.pyplot as plt
-import numpy as np
 from collections import Counter
 from scipy import stats as spStats
 import dataGetter as data
+import barplot
 
-# Barplot
-
-# Get mean values
-femaleAvgIncome = np.mean(data.femaleIncome)
-maleAvgIncome = np.mean(data.maleIncome)
-femaleAvgProductivity = np.mean(data.femaleProductivity)
-maleAvgProductivity = np.mean(data.maleProductivity)
-femaleAvgSkills = np.mean(data.femaleSkills)
-maleAvgSkills = np.mean(data.maleSkills)
-
-menMeans = [
-    np.round(maleAvgIncome, 2), 
-    np.round(maleAvgProductivity, 2), 
-    np.round(maleAvgSkills, 2)
-]
-womenMeans = [
-    np.round(femaleAvgIncome, 2), 
-    np.round(femaleAvgProductivity, 2), 
-    np.round(femaleAvgSkills, 2)
-]
-
-# Create charts
-labels = ['Income', 'Skills', 'Productivity']
-x = np.arange(len(labels))
-width = 0.4
-
-fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, menMeans, width, label='Men')
-rects2 = ax.bar(x + width/2, womenMeans, width, label='Women')
-
-# Add some text for labels, title and custom x-axis tick labels, etc.
-ax.set_ylabel('Income, Productivity / Skill level')
-ax.set_title('Income, Productivity and Skill level by gender')
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
-ax.legend()
-
-def autolabel(rects):
-    """Attach a text label above each bar in *rects*, displaying its height."""
-    for rect in rects:
-        height = rect.get_height()
-        ax.annotate('{}'.format(height),
-                    xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),  # 3 points vertical offset
-                    textcoords="offset points",
-                    ha='center', va='bottom')
-
-autolabel(rects1)
-autolabel(rects2)
-
-fig.tight_layout()
-
-plt.show()
+# Ex 1a. Barplot
+barplot.show()
 
 
 # Pie chart, where the slices will be ordered and plotted counter-clockwise:
