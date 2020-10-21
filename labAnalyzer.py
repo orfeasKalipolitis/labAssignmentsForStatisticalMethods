@@ -1,67 +1,19 @@
 
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
 from scipy import stats as spStats
-
-dataFilename = "jss13_ht20.xlsx"
-# empty cells have been replaced with 0s
-
-# Get data from xlsl file
-dataFrame = pd.read_excel(dataFilename, sheet_name=None)
-dataMatrix = dataFrame['Sheet1']
-
-# get each column of data
-gender = dataMatrix['gender']
-income = dataMatrix['income']
-productivity = dataMatrix['prody']
-skills = dataMatrix['skill']
-ethnic = dataMatrix['ethnicgp']
-quality = dataMatrix['qual']
-satisfaction = dataMatrix['satis']
-commitment = dataMatrix['commit']
-autonomy = dataMatrix['autonom']
-age = dataMatrix['age']
-years = dataMatrix['years']
-routine = dataMatrix['routine']
-attendance = dataMatrix['attend']
-absence = dataMatrix['absence']
-
-# Prapare gendered data
-femaleIncome = []
-maleIncome = []
-femaleSkills = []
-maleSkills = []
-femaleProductivity = []
-maleProductivity = []
-femaleSatisfaction = []
-maleSatisfaction = []
-
-# Distinguish female from male data
-iterator = 0
-for person in gender:
-    if person == 1:
-        maleIncome.append(income[iterator])
-        maleProductivity.append(productivity[iterator])
-        maleSkills.append(skills[iterator])
-        maleSatisfaction.append(satisfaction[iterator])
-    else:
-        femaleIncome.append(income[iterator])
-        femaleProductivity.append(productivity[iterator])
-        femaleSkills.append(skills[iterator])
-        femaleSatisfaction.append(satisfaction[iterator])
-    iterator = iterator + 1
+import dataGetter as data
 
 # Barplot
 
 # Get mean values
-femaleAvgIncome = np.mean(femaleIncome)
-maleAvgIncome = np.mean(maleIncome)
-femaleAvgProductivity = np.mean(femaleProductivity)
-maleAvgProductivity = np.mean(maleProductivity)
-femaleAvgSkills = np.mean(femaleSkills)
-maleAvgSkills = np.mean(maleSkills)
+femaleAvgIncome = np.mean(data.femaleIncome)
+maleAvgIncome = np.mean(data.maleIncome)
+femaleAvgProductivity = np.mean(data.femaleProductivity)
+maleAvgProductivity = np.mean(data.maleProductivity)
+femaleAvgSkills = np.mean(data.femaleSkills)
+maleAvgSkills = np.mean(data.maleSkills)
 
 menMeans = [
     np.round(maleAvgIncome, 2), 
@@ -110,7 +62,7 @@ plt.show()
 
 # Pie chart, where the slices will be ordered and plotted counter-clockwise:
 labels = ['White', 'Asian', 'West Indian', 'African', 'other']
-ethnicGroups = Counter(ethnic)
+ethnicGroups = Counter(data.ethnic)
 sizes = [ethnicGroups[1], ethnicGroups[2], ethnicGroups[3], ethnicGroups[4], ethnicGroups[5]]
 explode = (0.1, 0.2, 0.3, 0.4, 0.5)  # "explode" each slice a different amount
 
@@ -123,15 +75,15 @@ plt.show()
 
 
 # Box plot
-ageMax = np.max(age)
-ageMin = np.min(age)
-ageMedian = np.median(age)
-ageQ1 = np.quantile(age, 0.25)
-ageQ3 = np.quantile(age, 0.75)
+ageMax = np.max(data.age)
+ageMin = np.min(data.age)
+ageMedian = np.median(data.age)
+ageQ1 = np.quantile(data.age, 0.25)
+ageQ3 = np.quantile(data.age, 0.75)
 print('Q1: ', ageQ1)
 print('Q2: ', ageQ3)
 
-boxData = [age]
+boxData = [data.age]
 fig3, ax3 = plt.subplots()
 ax3.set_title('max, min, median, the first and third quartile box plot of Age')
 ax3.boxplot(boxData, showmeans=True)
@@ -140,19 +92,19 @@ plt.show()
 
 
 # Ex 1.c: mean and Standard Deviation of Income
-incomeMean = np.mean(income)
-incomeStandardDeviation = np.std(income)
+incomeMean = np.mean(data.income)
+incomeStandardDeviation = np.std(data.income)
 
 print('Income mean: ', incomeMean)
 print('Income Standard Deviation: ', incomeStandardDeviation)
 
 # the histogram of the data
-n, bins, patches = plt.hist(income, 50, density=True, facecolor='g', alpha=0.75)
+n, bins, patches = plt.hist(data.income, 50, density=True, facecolor='g', alpha=0.75)
 
 plt.xlabel('Gross Annual Income in 1000s of GBP')
 plt.ylabel('Probability')
 plt.title('Histogram of Income')
-plt.xlim(np.min(income) + 5, np.max(income) + 5)
+plt.xlim(np.min(data.income) + 5, np.max(data.income) + 5)
 #plt.ylim(0, 0.03)
 plt.grid(True)
 plt.show()
