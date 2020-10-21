@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
+from scipy import stats as spStats
 
 dataFilename = "jss13_ht20.xlsx"
 # empty cells have been replaced with 0s
@@ -34,6 +35,8 @@ femaleSkills = []
 maleSkills = []
 femaleProductivity = []
 maleProductivity = []
+femaleSatisfaction = []
+maleSatisfaction = []
 
 # Distinguish female from male data
 iterator = 0
@@ -42,10 +45,12 @@ for person in gender:
         maleIncome.append(income[iterator])
         maleProductivity.append(productivity[iterator])
         maleSkills.append(skills[iterator])
+        maleSatisfaction.append(satisfaction[iterator])
     else:
         femaleIncome.append(income[iterator])
         femaleProductivity.append(productivity[iterator])
         femaleSkills.append(skills[iterator])
+        femaleSatisfaction.append(satisfaction[iterator])
     iterator = iterator + 1
 
 # Barplot
@@ -235,3 +240,37 @@ YEst = X.dot(B)
 SSE = np.sum(np.power(Y - YEst, 2))
 print('This gives an error sum of squares equal to: ', SSE)
 # They are off by ~1% one from the other, so dropping those definitely is for the better
+
+
+# Ex 4. Find confidence interval of job satisfaction
+confidenceLevel = 0.95
+ciSatisfaction = spStats.t.interval(confidenceLevel, len(satisfaction) - 1, loc=np.mean(satisfaction), scale=spStats.sem(satisfaction))
+print('The confidence interval of job satisfaction for all genders was: ', end='')
+print(ciSatisfaction)
+
+# Find confidence interval of difference in job satisfaction between men and women
+
+# Clean satisfaction data, as both female and male data need to have same length
+# Create local copies to mess with
+tmpMaleSatisfaction = maleSatisfaction.copy()
+tmpFemaleSatisfaction = femaleSatisfaction.copy()
+nMale = len(tmpMaleSatisfaction)
+nFemale = len(tmpFemaleSatisfaction)
+
+# Python dataToClean to be a reference to either of the two NOT a copy of the values
+dataToClean = tmpFemaleSatisfaction if nFemale > nMale else tmpMaleSatisfaction
+nDataToClean = len(dataToClean)
+
+# Get rid of the first elements of the biggest array and replace on original array
+dataToClean.sort()
+dataToClean = np.delete(dataToClean, range(0, abs(nFemale - nMale)))
+if nFemale > nMale:
+    tmpFemaleSatisfaction = dataToClean.copy()
+else:
+    tmpMaleSatisfaction = dataToClean.copy()
+
+# Get the diff and output the answer
+diffSatisfaction = np.abs(np.array(tmpFemaleSatisfaction) - np.array(tmpMaleSatisfaction))
+ciSatisfaction = spStats.t.interval(confidenceLevel, len(diffSatisfaction) - 1, loc=np.mean(diffSatisfaction), scale=spStats.sem(diffSatisfaction))
+print('The confidence interval of difference in job satisfaction between men and women was: ', end='')
+print(ciSatisfaction)
