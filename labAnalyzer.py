@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from scipy import stats as spStats
 import dataGetter as data
-import barplot, pieChart
+import barplot, pieChart, boxplot
 
 # Ex 1a. Barplot
 barplot.show()
@@ -11,21 +11,8 @@ barplot.show()
 pieChart.show()
 
 
-# Box plot
-ageMax = np.max(data.age)
-ageMin = np.min(data.age)
-ageMedian = np.median(data.age)
-ageQ1 = np.quantile(data.age, 0.25)
-ageQ3 = np.quantile(data.age, 0.75)
-print('Q1: ', ageQ1)
-print('Q2: ', ageQ3)
-
-boxData = [data.age]
-fig3, ax3 = plt.subplots()
-ax3.set_title('max, min, median, the first and third quartile box plot of Age')
-ax3.boxplot(boxData, showmeans=True)
-plt.xlabel('Age')
-plt.show()
+# Ex 1b. Box plot
+boxplot.show()
 
 
 # Ex 1.c: mean and Standard Deviation of Income
