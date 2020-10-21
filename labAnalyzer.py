@@ -278,5 +278,33 @@ print(ciSatisfaction)
 
 # Ex 5. Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women
 mwwTest = spStats.mannwhitneyu(femaleSkills, maleSkills)
-print('Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women')
+print('Mann-Whitney-Wilcoxon test to see if there is any significance in skill between men and women:')
 print(mwwTest)
+
+
+# Ex 6. Kruskal-Wallis  test  to  see  if  there  is  any  significance  in  absence  among  ethnic group
+
+# Prepare ethnic group data for absence
+whiteAbsence = []
+asianAbsence = []
+westIndianAbsence = []
+africanAbsence = []
+
+for i in range(0, len(absence)):
+    # White
+    if(ethnic[i] == 1):
+        whiteAbsence.append(absence[i])
+    # Asian
+    elif(ethnic[i] == 2):
+        asianAbsence.append(absence[i])
+    # West Indian
+    elif(ethnic[i] == 3):
+        westIndianAbsence.append(absence[i])
+    # African
+    elif(ethnic[i] == 4):
+        africanAbsence.append(absence[i])
+
+# Do the Kruskal-Wallis test and output the results
+kwTest = spStats.kruskal(whiteAbsence, asianAbsence, westIndianAbsence, africanAbsence)
+print('Kruskal-Wallis test to see if there is any significance in absence among ethnic groups:')
+print(kwTest)
