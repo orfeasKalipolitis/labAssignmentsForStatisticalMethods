@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 dataFilename = "jss13_ht20.xlsx"
 # empty cells have been replaced with 0s
@@ -47,3 +48,22 @@ for person in gender:
         femaleSkills.append(skills[iterator])
         femaleSatisfaction.append(satisfaction[iterator])
     iterator = iterator + 1
+
+# Get mean values
+femaleAvgIncome = np.mean(femaleIncome)
+maleAvgIncome = np.mean(maleIncome)
+femaleAvgProductivity = np.mean(femaleProductivity)
+maleAvgProductivity = np.mean(maleProductivity)
+femaleAvgSkills = np.mean(femaleSkills)
+maleAvgSkills = np.mean(maleSkills)
+
+menMeans = [
+    np.round(maleAvgIncome, 2), 
+    np.round(maleAvgProductivity, 2), 
+    np.round(maleAvgSkills, 2)
+]
+womenMeans = [
+    np.round(femaleAvgIncome, 2), 
+    np.round(femaleAvgProductivity, 2), 
+    np.round(femaleAvgSkills, 2)
+]
