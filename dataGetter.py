@@ -67,3 +67,48 @@ womenMeans = [
     np.round(femaleAvgProductivity, 2), 
     np.round(femaleAvgSkills, 2)
 ]
+
+
+# Prepare ethnic group data for absence
+whiteAbsence = []
+asianAbsence = []
+westIndianAbsence = []
+africanAbsence = []
+
+for i in range(0, len(absence)):
+    # White
+    if(ethnic[i] == 1):
+        whiteAbsence.append(absence[i])
+    # Asian
+    elif(ethnic[i] == 2):
+        asianAbsence.append(absence[i])
+    # West Indian
+    elif(ethnic[i] == 3):
+        westIndianAbsence.append(absence[i])
+    # African
+    elif(ethnic[i] == 4):
+        africanAbsence.append(absence[i])
+
+
+# Create 3 separate income groups: low, middle and high
+incomeQ = np.quantile(income, [0.25, 0.75])
+lowIncome = []
+skillLowIncome = []
+middleIncome = []
+skillMiddleIncome = []
+highIncome = []
+skillHighIncome = []
+
+for i in range(0, len(income)):
+    # [min, Q1]
+    if income[i] <= incomeQ[0]:
+        lowIncome.append(income[i])
+        skillLowIncome.append(skills[i])
+    # (Q1, Q3]
+    elif income[i] <= incomeQ[1]:
+        middleIncome.append(income[i])
+        skillMiddleIncome.append(skills[i])
+    # (Q3, max]
+    else:
+        highIncome.append(income[i])
+        skillHighIncome.append(skills[i])
