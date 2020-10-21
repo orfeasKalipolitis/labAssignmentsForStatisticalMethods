@@ -1,7 +1,8 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats as spStats
 import dataGetter as data
-import barplot, pieChart, boxplot
+import barplot, pieChart, boxplot, histogram
 
 # Ex 1a. Barplot
 barplot.show()
@@ -23,15 +24,8 @@ print('Income mean: ', incomeMean)
 print('Income Standard Deviation: ', incomeStandardDeviation)
 
 # the histogram of the data
-n, bins, patches = plt.hist(data.income, 50, density=True, facecolor='g', alpha=0.75)
-
-plt.xlabel('Gross Annual Income in 1000s of GBP')
-plt.ylabel('Probability')
-plt.title('Histogram of Income')
-plt.xlim(np.min(data.income) + 5, np.max(data.income) + 5)
-#plt.ylim(0, 0.03)
-plt.grid(True)
-plt.show()
+input('Press Enter to continue')
+histogram.show()
 
 
 # Ex 2
