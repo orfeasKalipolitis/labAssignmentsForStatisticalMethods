@@ -309,8 +309,47 @@ kwTest = spStats.kruskal(whiteAbsence, asianAbsence, westIndianAbsence, africanA
 print('Kruskal-Wallis test to see if there is any significance in absence among ethnic groups:')
 print(kwTest)
 
+# If one-way ANOVA reports a P value of <0.05, 
+# you reject the null hypothesis that all the data 
+# are sampled from populations with the same mean.
+
 # Do the One-Way Anova test and output the results
 anovaTest = spStats.f_oneway(whiteAbsence, asianAbsence, westIndianAbsence, africanAbsence)
 print('One-Way Anova test to see if there is any significance in absence among ethnic groups:')
-print(kwTest)
-# we get the exact same results
+print(anovaTest)
+
+
+# Ex 7. Income class and its relationship with skill
+
+# Create 3 separate income groups: low, middle and high
+incomeQ = np.quantile(income, [0.25, 0.75])
+lowIncome = []
+skillLowIncome = []
+middleIncome = []
+skillMiddleIncome = []
+highIncome = []
+skillHighIncome = []
+
+for i in range(0, len(income)):
+    # [min, Q1]
+    if income[i] <= incomeQ[0]:
+        lowIncome.append(income[i])
+        skillLowIncome.append(skills[i])
+    # (Q1, Q3]
+    elif income[i] <= incomeQ[1]:
+        middleIncome.append(income[i])
+        skillMiddleIncome.append(skills[i])
+    # (Q3, max]
+    else:
+        highIncome.append(income[i])
+        skillHighIncome.append(skills[i])
+
+# Print out the mean skill of each income group
+print('Mean low income skill:', np.mean(skillLowIncome))
+print('Mean middle income skill:', np.mean(skillMiddleIncome))
+print('Mean high income skill:', np.mean(skillHighIncome))
+
+# Use the One-Way Anova test to see if there is significant different in the income groups' mean skill
+anovaTest = spStats.f_oneway(skillLowIncome, skillMiddleIncome, skillHighIncome)
+print('One-Way Anova test to see if there is significant different in the income groups\' mean skill:')
+print(anovaTest)
