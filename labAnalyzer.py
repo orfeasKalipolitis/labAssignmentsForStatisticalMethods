@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats as spStats
 import dataGetter as data
-import barplot, pieChart, boxplot, histogram
+import barplot, pieChart, boxplot, histogram, scatterplot, simpleRegression
 
 # Ex 1a. Barplot
 barplot.show()
@@ -24,56 +24,17 @@ print('Income mean: ', incomeMean)
 print('Income Standard Deviation: ', incomeStandardDeviation)
 
 # the histogram of the data
-input('Press Enter to continue')
+input('Press Enter to continue: ')
 histogram.show()
 
 
 # Ex 2
-x = income
-y = quality
-
-plt.scatter(x, y, c="g", label="Relationship between Income & Rated Quality")
-plt.xlabel("Income")
-plt.ylabel("Rated Quality")
-plt.legend(loc='upper left')
-plt.show()
+input('Press Enter to continue: ')
+scatterplot.show()
 
 # Find the simple regression model where income is the dependent variable and rated quality is the independent
 # What is the determination coefficient?
-
-# Library solution
-x = quality
-y = income
-
-correlation_matrix = np.corrcoef(x, y)
-correlation_xy = correlation_matrix[0,1]
-detCoeff = correlation_xy ** 2
-print('Library (numpy) solution: Our calculated determination coefficient is: ', detCoeff) 
-
-
-# DIY solution Following Lecture 11 Simple Regression
-
-x = np.array(quality) # independent
-y = np.array(income)  # dependent
-
-xMean = np.mean(x)
-yMean = np.mean(y)
-
-b1 = np.sum((x - xMean) * (y - yMean) / np.sum(np.power(x - xMean, 2)))
-b0 = yMean - (b1 * xMean)
-
-yEst = b0 + (b1 * x)
-
-sign = '+' if b1 > 0 else ''
-print('Estimated regression equation: yEst = ', b0, sign, b1, '* x')
-
-# calculate the error sum squares (SSE) and the total corrected sum squares (SST)
-SSE = np.sum(np.power(y - yEst, 2))
-SST = np.sum(np.power(y - yMean, 2))
-
-# calculate the determination coefficient R^2
-R2 = 1 - (SSE / SST)
-print('DIY: Our calculated determination coefficient is: ', R2) 
+simpleRegression.show()
 
 
 # Ex 3. Multiple Regression Model. 
