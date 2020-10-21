@@ -308,3 +308,9 @@ for i in range(0, len(absence)):
 kwTest = spStats.kruskal(whiteAbsence, asianAbsence, westIndianAbsence, africanAbsence)
 print('Kruskal-Wallis test to see if there is any significance in absence among ethnic groups:')
 print(kwTest)
+
+# Do the One-Way Anova test and output the results
+anovaTest = spStats.f_oneway(whiteAbsence, asianAbsence, westIndianAbsence, africanAbsence)
+print('One-Way Anova test to see if there is any significance in absence among ethnic groups:')
+print(kwTest)
+# we get the exact same results
