@@ -274,3 +274,9 @@ diffSatisfaction = np.abs(np.array(tmpFemaleSatisfaction) - np.array(tmpMaleSati
 ciSatisfaction = spStats.t.interval(confidenceLevel, len(diffSatisfaction) - 1, loc=np.mean(diffSatisfaction), scale=spStats.sem(diffSatisfaction))
 print('The confidence interval of difference in job satisfaction between men and women was: ', end='')
 print(ciSatisfaction)
+
+
+# Ex 5. Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women
+mwwTest = spStats.mannwhitneyu(femaleSkills, maleSkills)
+print('Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women')
+print(mwwTest)
