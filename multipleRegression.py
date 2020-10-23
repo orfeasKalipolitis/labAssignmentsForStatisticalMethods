@@ -8,10 +8,10 @@ X = XT.transpose()
 XTX = XT.dot(X)
 XTY = XT.dot(Y)
 
-B = np.linalg.inv(XTX).dot(XTY)
+B1 = np.linalg.inv(XTX).dot(XTY)
 
 
-YEst = X.dot(B)
+YEst = X.dot(B1)
 SSE = np.sum(np.power(Y - YEst, 2))
 
 
@@ -22,19 +22,23 @@ X = XT.transpose()
 XTX = XT.dot(X)
 XTY = XT.dot(Y)
 
-B = np.linalg.inv(XTX).dot(XTY)
-YEst = X.dot(B)
+B2 = np.linalg.inv(XTX).dot(XTY)
+YEst = X.dot(B2)
 SSE2 = np.sum(np.power(Y - YEst, 2))
 # They are off by ~1% one from the other, so dropping those definitely is for the better
 
 
 def show():
     print('Variable weights:')
-    print(B)
+    print(B1)
     print()
     print('This gives an error sum of squares equal to: ', SSE)
     print()
     print('Income and years seems to have the lowest significance at weights of ~0.04 and less than 0.02 respectively.')
     print('Dropping the income and years as independent variables.')
+    print('This gives a new set of weights:')
+    print(B2)
     print()
     print('This gives an error sum of squares equal to: ', SSE2)
+
+show()
