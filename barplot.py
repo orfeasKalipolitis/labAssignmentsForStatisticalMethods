@@ -46,5 +46,3 @@ fig.tight_layout()
 
 def show():
     plt.show()
-
-show()
