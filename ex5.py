@@ -18,8 +18,16 @@ diffSkills = np.abs(localMaleSkills - localFemSkills)
 confidenceLevel = 0.95
 ciSkillDifference = spStats.t.interval(confidenceLevel, len(diffSkills) - 1, loc=np.mean(diffSkills), scale=spStats.sem(diffSkills))
 
+# Use the One-Way Anova test to see if there is significant different in the income groups' mean skill
+anovaTest = spStats.f_oneway(data.femaleSkills, data.maleSkills)
+
 def show():
     print('Mann-Whitney-Wilcoxon test to see if there is any significance in skill between men and women:')
     print(mwwTest)
     print('')
     print(ciSkillDifference)
+    print('')
+    print('In order to compare them further, we are also performing an ANOVA analysis:')
+    print(anovaTest)
+
+show()
