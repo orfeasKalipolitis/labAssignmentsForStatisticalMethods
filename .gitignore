@@ -130,3 +130,4 @@ dmypy.json
 
 # Orfeas' ignore pile
 charts/
+csse_covid_19_daily_reports/
