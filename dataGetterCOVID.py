@@ -26,3 +26,4 @@ print()
 
 # We choose to keep only part of the data, so we have all the possible data points
 dataFrames = dataFrames[126:][:]
+startingDate = 127
