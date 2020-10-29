@@ -19,9 +19,10 @@ def confidenceIntervalDifference(quantitativeVar1, quantitativeVar2, confidence=
     print()
     anovaTest(quantitativeVar1, quantitativeVar2)
 
-def anovaTest(var1, var2):
-    anova = spStats.f_oneway(var1, var2)
+def anovaTest(*variables):
+    anova = spStats.f_oneway(*variables)
     print('In order to compare them further, we are also performing an ANOVA analysis:')
     print('If the p-value is less than or equal to your significance level,')
     print('you should reject the null hypothesis and conclude that not all of population means are equal.')
+    print('otherwise, you should assume that all of population means are equal.')
     print(anova)
