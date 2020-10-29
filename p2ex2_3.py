@@ -1,6 +1,5 @@
 import numpy as np
 from scipy import stats as spStats
-import dataGetter as data
 
 # default confidence level
 confidenceLevel = 0.95
