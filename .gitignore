@@ -130,3 +130,9 @@ dmypy.json
 
 # Orfeas' ignore pile
 charts/
+
+# Visual Studio project files
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
+/.vs/labAssignmentsForStatisticalMethods/v16/.suo
