@@ -2,9 +2,9 @@ import numpy as np
 from scipy import stats as spStats
 import dataGetter as data
 import barplot, pieChart, boxplot, histogram, scatterplot
-import confidence, simpleRegression, multipleRegression
+import confidence, simpleRegression, multipleRegression, ex5
 
-print()
+print('Ex 1')
 # Ex 1a. Barplot
 barplot.show()
 
@@ -34,7 +34,7 @@ input('Press Enter to continue: ')
 histogram.show()
 
 
-print()
+print('Ex 2')
 # Ex 2
 input('Press Enter to continue: ')
 scatterplot.show()
@@ -46,7 +46,7 @@ print()
 simpleRegression.show()
 
 
-print()
+print('Ex 3')
 # Ex 3. Multiple Regression Model. 
 # dependent: satis
 # independent: commit, autonom, income, skill, rated quality, age, years 
@@ -54,19 +54,16 @@ print()
 multipleRegression.show()
 
 
-print()
+print('Ex 4')
 # Ex 4. Find confidence interval of job satisfaction
 confidence.show()
 
 
-print()
+print('Ex 5')
 # Ex 5. Mann-Whitney-Wilcoxon test to see if there is any significant difference in skill between men and women
-mwwTest = spStats.mannwhitneyu(data.femaleSkills, data.maleSkills)
-print('Mann-Whitney-Wilcoxon test to see if there is any significance in skill between men and women:')
-print(mwwTest)
+ex5.show()
 
-
-print()
+print('Ex 6')
 # Ex 6. Kruskal-Wallis  test  to  see  if  there  is  any  significance  in  absence  among  ethnic group
 
 # Do the Kruskal-Wallis test and output the results
@@ -84,7 +81,7 @@ print('One-Way Anova test to see if there is any significance in absence among e
 print(anovaTest)
 
 
-print()
+print('Ex 7')
 # Ex 7. Income class and its relationship with skill
 
 # Print out the mean skill of each income group
