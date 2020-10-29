@@ -1,20 +1,22 @@
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
-folder = 'csse_covid_19_daily_reports/'
+dataFolder = Path("csse_covid_19_daily_reports/")
 year = 2020
 ext = '.csv'
 dataFrames = []
-debug = False
+debug = True
 
 # Trying to open 1 csv file for each day of the year
 # Catching exceptions for days that we either don't have data for,
 # haven't happened yet, or don't exist
 for month in range(1, 12):
     for day in range(1, 31):
-        filePath = folder + str(month).zfill(2) + '-' + str(day).zfill(2) + '-' + str(year) + ext
+        fileToOpen = str(month).zfill(2) + '-' + str(day).zfill(2) + '-' + str(year) + ext
+        fileToOpenRelativePath = dataFolder / fileToOpen
         try:
-            dataFrame = pd.read_csv(filePath)
+            dataFrame = pd.read_csv(fileToOpenRelativePath)
             dataFrames.append(dataFrame)
         except Exception as e:
             if debug:
