@@ -1,58 +1,7 @@
-import dataGetterCOVID as data
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Create charts
-labels = ['Day 147', 'Day 148']
-x = np.arange(len(labels))
-width = 0.4
-
-fig, ax = plt.subplots()
-
-# Working on day 0
-indexGreece = 0
-indexItaly = 0
-countries = []
-confirmed = []
-for i in range(0, len(data.dataFrames)):
-    confirmed.append(data.dataFrames[i]['Confirmed'])
-    countries.append(data.dataFrames[i]['Country_Region'])
-
-greeceFound = False
-italyFound = False
-for country in countries[0]:
-    
-    if country.lower() == 'Greece'.lower():
-        greeceFound = True
-    elif country.lower() == 'Italy'.lower():
-        italyFound = True
-    
-    if not greeceFound:
-        indexGreece = indexGreece + 1
-    if not italyFound:
-        indexItaly = indexItaly + 1
-    
-    if greeceFound and italyFound:
-        break
-
-if indexGreece >= len(countries):
-    print('Greece not found')
-
-if indexItaly >= len(countries):
-    print('Italy not found')
-
-
-rects1 = ax.bar(x - width, [confirmed[0][indexGreece], confirmed[1][indexGreece]], width, label=countries[0][indexGreece])
-rects2 = ax.bar(x + width, [confirmed[0][indexItaly], confirmed[1][indexItaly]], width, label=countries[0][indexItaly])
-
-# Add some text for labels, title and custom x-axis tick labels, etc.
-ax.set_ylabel('Number of confirmed cases')
-ax.set_title('Cases of COVID-19 in different countries')
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
-ax.legend()
-
-def autolabel(rects):
+def autolabel(rects, ax):
     """Attach a text label above each bar in *rects*, displaying its height."""
     for rect in rects:
         height = rect.get_height()
@@ -62,12 +11,41 @@ def autolabel(rects):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
-autolabel(rects1)
-autolabel(rects2)
+def prepareChartData(xLabelsForChart, yLabelForChart, aVar, bVar, dataLabelA, dataLabelB, titleForChart, axis):
+    labels = xLabelsForChart
+    a = aVar
+    b = bVar
 
-fig.tight_layout()
+    x = np.arange(len(labels))  # the label locations
+    width = 0.35  # the width of the bars
 
-def show():
+    rects1 = axis.bar(x - width/2, a, width, label=dataLabelA)
+    rects2 = axis.bar(x + width/2, b, width, label=dataLabelB)
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    axis.set_ylabel(yLabelForChart)
+    axis.set_title(titleForChart)
+    axis.set_xticks(x)
+    axis.set_xticklabels(labels)
+    axis.legend()
+
+# Works for comparing any 2 sets of data points that have been made into n-pairs
+# each pair-group is represented as 2 bar plots one next to each other for comparison
+#
+# Parameters:
+# groupLabels: an array of string labels. one string for each group on the x-axis
+# yLabel: the label for the y-axis
+# dataA: the vector of one of the data points
+# dataB: the vector of of the another data point
+# labelDataA: a string for what dataA represents
+# labelDataB: a string for what dataB represents
+# title: a string for the title of the chart
+#
+# Notes:
+# the vectors groupLabels, dataA and dataB should all have the same length
+def comparativeBarChart(groupLabels, yLabel, dataA, dataB, labelDataA, labelDataB, title):
+    fig, ax = plt.subplots()
+    prepareChartData(groupLabels, yLabel, dataA, dataB, labelDataA, labelDataB, title, ax)
     plt.show()
 
-show()
+comparativeBarChart()
