@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from collections import Counter
 
 def autolabel(rects, ax):
     """Attach a text label above each bar in *rects*, displaying its height."""
@@ -48,4 +49,22 @@ def comparativeBarChart(groupLabels, yLabel, dataA, dataB, labelDataA, labelData
     prepareChartData(groupLabels, yLabel, dataA, dataB, labelDataA, labelDataB, title, ax)
     plt.show()
 
-comparativeBarChart()
+# Create a pie chart of the given variables
+# giving the percentage of each group
+#
+# Parameters:
+# pieLabales: a vector of strings containing each label for the data
+# data: a vector of the data to be represented by the pie chart
+# keys: a vector of keys found in data, in the same order as the labels
+#
+# Notes:
+# Do not include a key or label for something that doesn't appear in the data
+def pieChart(pieLabels, data, keys):
+    labels = pieLabels
+    countGroups = Counter(data)
+    sizes = [countGroups[key] for key in keys]
+    fig2, ax2 = plt.subplots()
+    ax2.pie(sizes, labels=labels, autopct='%1.2f%%',
+            shadow=True, startangle=90)
+    ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.show()
