@@ -1,5 +1,9 @@
 import dataGetterCOVID as data
 import p2ex1 as ex1
+import p2ex2_3 as ex2_3
+import p2ex4 as ex4
+import p2ex5 as ex5
+import p2ex6 as ex6
 
 print('Lab assignment - Part 2')
 print()
@@ -51,3 +55,73 @@ ex1.pieChart(pieLabels, confirmed30, pieKeys)
 # Pie plots for confirmed deaths as a result of the virus
 ex1.pieChart(pieLabels, deaths0, pieKeys)
 ex1.pieChart(pieLabels, deaths30, pieKeys)
+
+print()
+print('Exercise 2: Confidence interval for one quantitative variable; Confidence interval for difference')
+
+print()
+print('Quantitative variable: Deaths on the first 1000 US counties. On the Day', data.startingDate)
+ex2_3.confidenceInterval(days[0]['Deaths'][1:1000])
+
+print()
+print('Quantitative variable: Deaths globally. On the Day', data.startingDate)
+ex2_3.confidenceInterval(days[0]['Deaths'])
+
+print()
+print('Quantitative variable: Deaths on the first 1000 US counties. On the Day', data.startingDate + 30)
+ex2_3.confidenceInterval(data.dataFrames[29]['Deaths'][1:1000])
+
+print()
+print('Quantitative variable: Deaths globally. On the Day', data.startingDate + 30)
+ex2_3.confidenceInterval(data.dataFrames[29]['Deaths'])
+
+print()
+print('Quantitative variable: Incidence rate on the first 1000 US counties. On the Day', data.startingDate)
+ex2_3.confidenceInterval(data.dataFrames[0]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Quantitative variable: Incidence rate on the first 1000 US counties. On the Day', data.startingDate + 30)
+ex2_3.confidenceInterval(data.dataFrames[29]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Exercise 3: ANOVA')
+
+print()
+print('Quantitative variable1: Deaths on the first 1000 US counties. On the Day', data.startingDate)
+print('Quantitative variable2: Incidence rate on the first 1000 US counties. On the Day', data.startingDate)
+ex2_3.confidenceIntervalDifference(data.dataFrames[0]['Deaths'][1:1000], data.dataFrames[0]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Quantitative variable1: Deaths on the first 1000 US counties. On the Day', data.startingDate + 30)
+print('Quantitative variable2: Incidence rate on the first 1000 US counties. On the Day', data.startingDate + 30)
+ex2_3.confidenceIntervalDifference(data.dataFrames[29]['Deaths'][1:1000], data.dataFrames[29]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Exercise 4: Non-parametric test for some of your variables and even compare the conclusion(s) with ANOVA')
+
+print()
+print('Quantitative variable1: Deaths on the first 1000 US counties. On the Day', data.startingDate)
+print('Quantitative variable2: Incidence rate on the first 1000 US counties. On the Day', data.startingDate)
+ex4.mannWhitneyWilcoxonTest(data.dataFrames[0]['Deaths'][1:1000], data.dataFrames[0]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Quantitative variable1: Deaths on the first 1000 US counties. On the Day', data.startingDate + 30)
+print('Quantitative variable2: Incidence rate on the first 1000 US counties. On the Day', data.startingDate + 30)
+ex4.mannWhitneyWilcoxonTest(data.dataFrames[29]['Deaths'][1:1000], data.dataFrames[29]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Exercise 5: Correlation analysis, specially the strongest correlation and statistically not significant relation(s)')
+
+print()
+ex5.doTTests(data.dataFrames[0]['Confirmed'][1:1000], data.dataFrames[0]['Deaths'][1:1000], data.dataFrames[0]['Active'][1:1000], data.dataFrames[0]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+ex5.doTTests(data.dataFrames[29]['Confirmed'][1:1000], data.dataFrames[29]['Deaths'][1:1000], data.dataFrames[29]['Active'][1:1000], data.dataFrames[29]['Incidence_Rate'].fillna(0)[1:1000])
+
+print()
+print('Exercise 6: Regression Analysis')
+
+print()
+ex6.regressionAnalysis(data.dataFrames[0]['Confirmed'][1:1000], data.dataFrames[0]['Deaths'][1:1000], data.dataFrames[0]['Active'][1:1000], data.dataFrames[0]['Incidence_Rate'].fillna(0)[1:1000], confidence=0.9)
+
+print()
