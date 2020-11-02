@@ -11,5 +11,4 @@ def mannWhitneyWilcoxonTest(x, y):
     print('you should reject the null hypothesis and conclude that at least one significant difference can be assumed.')
     print(mwwTest)
     print()
-    print('In order to compare them further, we are also performing an ANOVA analysis:')
     anovaTest(x, y)
