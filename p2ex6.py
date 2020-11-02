@@ -4,10 +4,9 @@ from p2ex5 import doTTests
 defaultConfidenceLevel = 0.95
 
 def regressionAnalysis(dependentVar, *independentVars, confidence=defaultConfidenceLevel):
-    print(len(independentVars))
     print('Performing Multiple Regression Analysis between your dependent and independent variables.')
     # Figuring out which variables to drop
-    pvalues = doTTests(dependentVar, *independentVars)
+    pvalues = doTTests(dependentVar, *independentVars, confidence=confidence)
     risk = 1 - confidence
     prunedIndependentVars = []
     for i in range(0, len(pvalues)):
