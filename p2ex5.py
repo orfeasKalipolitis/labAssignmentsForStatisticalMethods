@@ -1,16 +1,18 @@
 from scipy import stats as spStats
 import numpy as np
 
+defaultConfidenceLevel = 0.95
+
 # Individual t-tests for Variable Screening
 # dependentVar is the Y vector of the dependent variable
 # independentVars are the variables in the X matrix of Y = X * B
 # you can add as many independent variables as you want
 # returns the p-values for all independent variables
-def doTTests(dependentVar, *independentVars):
+def doTTests(dependentVar, *independentVars, confidence=defaultConfidenceLevel):
     print()
     print('Performing t-tests of each independent variable against the dependent variable:')
-    print('Assuming a confidence level of 95%')
-    print('If we observe a large p-value larger than 0.05, then we cannot reject the null hypothesis of identical average scores.')
+    print('Assuming a confidence level of, ' + str(confidence * 100) + '%')
+    print('If we observe a large p-value larger than ' + str(1 - confidence) + ', then we cannot reject the null hypothesis of identical average scores.')
     print('And so you should conclude that variable is insignificant.')
 
     XT = np.array([np.ones(len(dependentVar)), *independentVars])
